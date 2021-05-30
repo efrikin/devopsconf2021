@@ -1,0 +1,57 @@
+@import "reveal-huawei-basic.css";
+
+.reveal {
+  color: black;
+}
+
+.reveal .slides section.title {
+  text-align: normal;
+}
+
+.reveal .white {
+  color: white
+}
+
+::selection {
+  color: white;
+  background-color: black;
+}
+
+
+/* keywords */
+.reveal *:not(pre)>code {
+  background-color: #eee;
+  color: black;
+}
+
+.reveal pre {
+  background: #ffffff;
+}
+
+/*******************
+* Timeline dark
+********************/
+
+.timeline ul, .pyramid ul {
+  color: white;
+}
+
+/* bubble */
+.timeline li, .pyramid li {
+    background: #999999;
+}
+
+/* right bubble arrow */
+.timeline ul li:nth-child(even):before {
+  border-right-color: #999999;
+}
+
+/* left bubble arrow */
+.timeline ul li:nth-child(odd):before {
+	border-left-color: #999999;
+}
+
+/* point on timeline */
+.timeline ul li:after {
+  border-color: white;
+}

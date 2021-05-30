@@ -1,0 +1,32 @@
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    container:
+      image: efrikin/asciidoctor-vega:1.0.0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Prepare build
+        run: |
+          sed -i -e "s/\(:social_network:\)\(.*\)/\1 ${GITHUB_ACTOR}/" \
+          -e "s/\(:revnumber:\)\(.*\)/\1 ${GITHUB_REF##*/}/" index.adoc
+
+      - name: Build
+        run: asciidoctor-revealjs -r asciidoctor-diagram index.adoc
+
+      - name: Prepare publish
+        run: |
+          mkdir public;
+          tar -cf - src/images plugins themes index.html | tar -xf - -C public
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

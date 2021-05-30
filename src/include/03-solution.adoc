@@ -1,0 +1,232 @@
+== ! 
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+[.halign-center]
+[.big]
+[orange]#**Scalability testing solutions**#
+
+image::solutions.png[width=31%]
+
+== icon:sun[fw] Scalability testing solutions
+
+[frame=none, grid=none,cols="60a,100a"]
+|===
+.^|
+* Bare metal/VMs
+.^|
+image:solutions_k8s_install_bare.png[width=70%]
+|===
+
+
+== icon:sun[fw] Scalability testing solutions
+
+[frame=none, grid=none, cols="60a,100a"]
+|===
+.^|
+* Bare metal/VMs
+* kind/minikube/microk8s
+
+.^|
+image:solutions_k8s_install_kind.png[width=55%]
+
+|===
+
+== icon:sun[fw] Scalability testing solutions
+
+[frame=none, grid=none, cols="80a,100a"]
+|===
+
+.^|
+* Baremetal/VMs
+* kind/minikube/microk8s
+* real cluster + [orange]#**kubemark**#
+.^| image:solutions_k8s_install_kubemark.png[]
+
+|===
+
+== !
+
+{empty} +
+{empty} +
+
+image::kubemark_our_solution.png[float=center]
+
+== icon:sun[fw] Why kubemark?
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+
+[quote, Kubernetes blog, 'https://kubernetes.io/blog/2016/07/update-on-kubernetes-for-windows-server-containers/[What is Kubemark?]']
+[orange]#**Kubemark**# is a performance testing tool which allows users to do experiments on simulated clusters.
+
+== icon:sun[fw] Why kubemark?
+{empty} +
+{empty} +
+{empty} +
+[frame=none, grid=none, cols="100a,90a"]
+|===
+.^|
+* Real cluster
+.^| image:kubemark_arch_0.png[float=right]
+|===
+
+
+== icon:sun[fw] Why kubemark?
+
+[frame=none, grid=none, cols="100a,90a"]
+|===
+.^|
+* Real cluster
+* Master node for hollow cluster
+.^|
+image:kubemark_arch_1.png[float=right]
+|===
+
+== icon:sun[fw] Why kubemark?
+[frame=none, grid=none, cols="100a,90a"]
+|===
+.^|
+* Real cluster
+* Master node for hollow cluster
+* Hollow nodes
+    ** Hollow kubelet
+    ** Hollow kube-proxy
+
+[%step]
+* Node problem detector
+.^| image:kubemark_arch_2.png[float=right]
+|===
+
+== icon:sun[fw] Why kubemark?
+{empty} +
+
+**Hollow cluster = real cluster**
+
+{empty} +
+
+image::hollow_as_real.png[float=center]
+
+== icon:sun[fw] Why kubemark?
+{empty} +
+
+**Capability to run many instances on a single host**
+
+** HollowNode doesn't modify the environment in which it is run
+
+{empty} +
+
+image::hollow_1.png[float=center, width=60%]
+
+== icon:sun[fw] Why kubemark?
+
+**Cheap scale tests**
+{empty} +
+
+[.small]
+** ~100 HollowNodes per core (~10 millicores and 10MB RAM per pod)
+** [orange]#**Simulated cluster**# = Deploy time of a real cluster + Deploy time of HollowNodes
+** [orange]#**kubectl**# tool used for all operations scaling operations
+
+{empty} +
+
+image::hollow_pod_deploy.png[float=left, height=400]
+
+== !
+
+image::cl2_mem.png[width=65%]
+
+== icon:sun[fw] Workload testing solutions
+{empty} +
+
+* helm or kubectl apply -f + some YAML files
+
+{empty} +
+
+image::cl2_solution_helm.png[float=center]
+
+== icon:sun[fw] Workload testing solutions
+{empty} +
+
+* helm or kubectl apply -f + some YAML files
+* [orange]#**clusterloader2**#
+
+{empty} +
+
+image::cl2_solution.png[float=center]
+
+== !
+
+{empty} +
+{empty} +
+{empty} +
+
+image::cl2_meme.png[]
+[.halign-center]
+[.big]
+[orange]#**Clusterloader2**#
+
+== icon:sun[fw] Why clusterloader2?
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+
+[quote, Documentation OpenShift, 'https://docs.openshift.com/container-platform/4.2/scalability_and_performance/using-cluster-loader.html[Using Clusterloader]']
+[orange]#**ClusterLoader2**# is Kubernetes test framework, which can deploy large numbers of various user-defined  objects to a cluster
+
+
+== icon:sun[fw] Why clusterloader2?
+
+{empty} +
+[%hardbreaks]
+**Simple**
+
+* Kubeconfig
+* Definition of sest (YAML)
+* Providers (gke, kubemark, aws, local, etc)
+
+image::cl2_simple.png[float=right, width=100%]
+
+== icon:sun[fw] Why clusterloader2?
+
+{empty} +
+[%hardbreaks]
+**User-oriented**
+
+* No Golang
+* Easy to understand 
+image:go_vs_yaml.png[float=right, width=140%]
+
+== icon:sun[fw] Why clusterloader2?
+
+{empty} +
+[%hardbreaks]
+**Testable**
+
+* Measurable SLI/SLO
+* Declarative paradigm
+image:testable.png[float=right, height=600]
+
+== icon:sun[fw] Why clusterloader2?
+
+{empty} +
+[%hardbreaks]
+**Extra metrics**
+
+* PodStartupLatency
+* MemoryProfile
+* MetricsForE2E
+* **...**
+image:extra_ob.png[float=right,width=140%]
+
+<<<

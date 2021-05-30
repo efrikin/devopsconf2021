@@ -1,0 +1,7 @@
+@import "reveal-huawei-basic-light.css";
+
+body {
+  background: no-repeat 98% 10% url('../../src/images/logo_devopsconf2021.png');
+  background-size: 10%, contain;
+  background-repeat: no-repeat;
+}

@@ -1,0 +1,5 @@
+src/images/diagrams/*
+.asciidoctor
+.history
+*.html
+

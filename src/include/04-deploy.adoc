@@ -1,0 +1,131 @@
+== !
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+[.halign-center]
+[.big]
+[orange]#** Deploy of hollow cluster**#
+
+image::deploy.png[]
+
+== icon:rocket[fw] Deploy of hollow cluster
+[.small]
+.Hardware
+[cols="^,^,^,^,^,^,^,^"]
+|===
+2+.^| **RAM**
+5+.^| **CPU**
+.2+.^|**Network**
+
+.^| **Total Capacity** .^| **Type**
+3+.^| **Model** .^| **Cores/Threads** .^| **Arch**
+
+.^| ~392GB .^| DDR4 3+.^| Kunpeng 920-4826 .^| 48/48 .^| [red]#**ARM64**# .^| 100Gb/s
+|===
+
+[.small]
+[.fragment]
+.Resources for real/hollow clusters
+[cols="^,^,^,^,^,^,^,^,^"]
+|===
+.2+.^| **Role**
+2+.^| **CPU**
+2+.^| **RAM**
+2+.^| **Disk**
+2+.^| **Number of nodes**
+
+| **Real** | **Hollow**
+| **Real** | **Hollow**
+| **Real** | **Hollow**
+| **Real** | **Hollow**
+
+| Master 2+| 12 2+| 23GB 2+| 15GB 2+| 3 
+| Monitoring 2+| 4 2+| 15GB 2+| 10GB 2+| 1
+| W-Node | 8 | [red]#**40m**# | 8GB | [red]#**20MB**# | 8GB | - | [red]#*50*# | [red]#**1**#
+|===
+
+== icon:rocket[fw] Deploy of hollow cluster
+{empty} +
+{empty} +
+{empty} +
+
+.Create NS
+```bash
+kubectl create ns kubemark
+```
+{empty} +
+[.fragment]
+.Create confimap
+```bash
+kubectl create configmap node-configmap \
+        -n kubemark --from-literal=content.type="test-cluster"
+```
+
+{empty} +
+[.fragment]
+.Create secret
+```bash
+kubectl create secret generic kubeconfig \
+        --type=Opaque --namespace=kubemark \
+        --from-file=kubelet.kubeconfig=${HOME}/.kube/config \
+        --from-file=kubeproxy.kubeconfig=${HOME}/.kube/config
+```
+
+== icon:rocket[fw] Deploy of hollow cluster
+
+[frame=none, grid=none,cols="40a,70a"]
+|===
+
+.^|
+```yaml
+apiVersion: v1
+kind: ReplicationController // <1>
+...
+spec:
+  replicas: 5 <2>
+  selector:
+    name: hollow-node
+  template:
+    metadata:
+      labels:
+        name: hollow-node
+    spec:
+...
+      containers:
+      - name: hollow-kubelet // <3>
+...
+      - name: hollow-proxy // <4>
+...
+        securityContext:
+          privileged: true
+```
+.^|
+[.small]
+<1> [red]#ReplicationController# is a standard resource
+<2> [red]#Replicas# = Number of HollowNodes
+<3> [red]#hollow-kubelet# is hollow kubelet
+<4> [red]#hollow-proxy# is hollow kube-proxy
+|===
+
+== icon:rocket[fw] Deploy of hollow cluster
+
+[frame=none, grid=none, cols="150a"]
+|===
+.^|
+.kubectl get nodes -l hollow
+```bash
+NAME               VERSION  OS-IMAGE                     KERNEL-VERSION        CONTAINER-RUNTIME
+hollow-node-hq92c  v1.19.7  Debian GNU/Linux 7 (wheezy)  3.16.0-0.bpo.4-amd64  fakeRuntime://0.1.0
+hollow-node-hqz6t  v1.19.7  Debian GNU/Linux 7 (wheezy)  3.16.0-0.bpo.4-amd64  fakeRuntime://0.1.0
+hollow-node-hsg6x  v1.19.7  Debian GNU/Linux 7 (wheezy)  3.16.0-0.bpo.4-amd64  fakeRuntime://0.1.0
+hollow-node-ht6rq  v1.19.7  Debian GNU/Linux 7 (wheezy)  3.16.0-0.bpo.4-amd64  fakeRuntime://0.1.0
+hollow-node-hwpdq  v1.19.7  Debian GNU/Linux 7 (wheezy)  3.16.0-0.bpo.4-amd64  fakeRuntime://0.1.0
+hollow-node-hxqsr  v1.19.7  Debian GNU/Linux 7 (wheezy)  3.16.0-0.bpo.4-amd64  fakeRuntime://0.1.0
+```
+[.fragment]
+image::kubemark_deploy.png[float=center, width=97%]
+|===
+
+<<<

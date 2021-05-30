@@ -1,0 +1,36 @@
+// revealjs
+// :revealjsdir: https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0
+:revealjsdir: themes/reveal.js
+:revealjs_customtheme: themes/css/reveal-huawei-light.css
+:revealjs_plugins: plugins/revealjs/revealjs-plugins.js
+:revealjs_plugins_configuration: plugins/revealjs/revealjs-plugins-conf.js
+
+:revealjs_slideNumber: true
+:revealjs_hash: true
+:revealjs_center: true
+:revealjs_transition: fade
+:revealjs_backgroundTransition: fade
+:revealjs_controls: false
+:revealjs_width: 1440 
+:revealjs_height: 900
+
+// Title page
+:title-slide-background-image: ../../themes/backgrounds/title.png
+//:title-slide-background-size: contain
+:source-highlighter: highlight.js
+:highlightjsdir: themes/highlight
+:highlightjs-theme: themes/highlight/styles/routeros.css
+:encoding: utf-8
+:toclevels: 1
+:toc: macro
+:icons: font
+:imagesdir: src/images
+:docinfodir: src/defaults
+:docinfo: shared
+:doctype: book 
+:experimental: true
+:idprefix: ""
+:idseparator: "-"
+
+// PlantumUML
+:plantuml-config: src/defaults/plantuml.conf

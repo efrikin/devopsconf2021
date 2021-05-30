@@ -1,0 +1,84 @@
+== !
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+[.halign-center]
+[.big]
+[orange]#**Our experience**#
+
+image::rake.jpg[width=20%]
+
+== icon:graduation-cap[fw] Our experience
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+
+[.small]
+**[orange]#Scaling k8s cluster up to 15k nodes(microk8s v18.7)#**
+[.small]
+* Real ~200 worker nodes and 1 master
+
+{empty} +
+[.small]
+**[orange]#Workload:#**
+[.small]
+* 70k out of the box 
+* 130k after tuning etcd
+
+== icon:graduation-cap[fw] Our experience
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+
+image:k8s_our_exp_api.png[float=right]
+[.small]
+**[orange]#Scaling k8s cluster up to 18k nodes(k8s v19.7)#**
+[.small]
+* Real ~200 worker nodes and 3 master
+
+{empty} +
+[.small]
+**[orange]#Workload:#**
+[.small]
+* 80k out of the box
+* 142k after tuning API-server
+
+== icon:graduation-cap[fw] Our experience
+
+{empty} +
+{empty} +
+{empty} +
+
+[.small]
+**[orange]#More than 20 real k8s clusters rendered inoperable during tests#**
+[.small]
+** default configuration not suitable for large large scale clusters
+image:mem_leaks_exp.png[float=right]
+*** etcd
+*** CNI 
+*** API-server
+** memory leaks caused by large number of resources
+*** etcd
+*** API-server
+
+== icon:graduation-cap[fw] Our experience
+
+[frame=none, grid=none,cols="60a,100a"]
+|===
+.^|
+[.small]
+**[orange]#Other#**
+[.small]
+** CrashLoopBackOff 
+** OOM
+.^| image:oom_and_crash.png[float=right, width=75%]
+|===
+
+<<<

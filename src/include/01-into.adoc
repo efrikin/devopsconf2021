@@ -1,0 +1,118 @@
+== !
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+
+[.halign-center]
+[.big]
+[orange]#**Introduction**#
+
+image::intro.png[width=20%]
+
+== icon:italic[fw] Introduction
+
+[frame=none, grid=none, cols="30a,50a"]
+|===
+.^| .^|
+.^| .^|
+.^| .^|
+.^| .^|
+.^| .^|
+.^| .^|
+.^| .^| image:guarantee.png[float=center]
+|===
+
+== icon:italic[fw] Introduction
+
+[frame=none, grid=none, cols="10a,100a"]
+|===
+.^| image:guarantee.png[] .^|
+
+[.small]
+[quote, Kubernetes Team, 'https://github.com/kubernetes/community/blob/master/sig-scalability/slos/slos.md#what-kubernetes-guarantees[What Kubernetes guarantees?]']
+One of the most important aspects of Kubernetes is its [purple]*#scalability#* and [purple]*#performance#* characteristic. As Kubernetes user, administrator or
+operator of a cluster we would expect to have some guarantees in those areas
+
+|===
+
+== icon:italic[fw] Introduction
+
+{empty} +
+{empty} +
+
+**Developers**
+
+* New features in Kubernetes (e.g Scheduler or API)
+* Outside of Kubernetes (e.g CNI, CSI or k8s Operator)
+
+{empty} +
+{empty} +
+
+image::dev_use_case.png[float=right]
+
+
+== icon:italic[fw] Introduction
+
+{empty} +
+{empty} +
+
+**Administrator/Operator**
+
+* Performance
+image:admin_use_case.png[float=right]
+* Scalability
+* Stability
+
+== icon:italic[fw] Introduction
+
+{empty} +
+{empty} +
+
+**Architect**
+
+* Capacity planning
+image:arch_use_case.png[float=right]
+* Cost calculation
+* Scalability architecture
+
+== icon:italic[fw] Introduction
+
+[frame=none, grid=none, cols="100a"]
+|===
+.^|
+* [orange]#**Service Level Indicators#** #define what and how we measure#
+* [orange]**#Service Level Objectives#** set specific requirements
+** cluster configuration
+** user of Kubernetes extensibility features
+** load cluster
+
+|===
+
+image::slislo.png[float=center]
+
+== icon:italic[fw] Introduction
+:figure-caption: Figure
+image::sli_slo_real_1.png[width=80%]
+
+== icon:italic[fw] Introduction
+
+image::sli_slo_real_2.png[width=80%]
+
+== icon:italic[fw] Introduction
+
+image::sli_slo_real_3.png[width=80%]
+
+== !
+
+{empty} +
+{empty} +
+
+[vega,diagrams/300-pods,svg]
+....
+include::diagrams/example-sli.json[]
+....
+
+<<<

@@ -1,0 +1,49 @@
+== icon:user[fw] About me
+:figure-caption!:
+
+[frame=none, grid=none, cols="75a,10a,100a"]
+|===
+.^| .^| .^|
+.^| .^| .^|
+.^| .^| .^|
+.^|
+:figure-caption!:
+.Evgenii Frikin
+image::about_me.png[width=100%]
+.^| .^|
+[%hardbreaks]
+[red]#**My experience:**#
+icon:caret-right[fw] In IT for more than 10 years
+icon:caret-right[fw] Started my career as a SysAdmin
+icon:caret-right[fw] SRE On-Call for about 3 years
+icon:caret-right[fw] Currently working in R&D
+{empty}
+[red]#**My contacts:**#
+[%hardbreaks]
+image:telegram_logo.png[width=10%, link="https://t.me/{social_network}"] {nbsp} image:linkedin.png[width=10%,link="https://linked.in/{social_network}"] {nbsp} image:octocat.png[width=12%,link="https://github.com/{social_network}"] **{social_network}**
+
+|===
+
+== icon:list-alt[fw] Agenda
+[frame=none, grid=none, cols="20a,5a,60a,70a"]
+|===
+.^| image:k8s.png[width=100%] .^| .^|
+[%hardbreaks]
+[.small]
+icon:italic[fw] Introduction
+icon:cloud-rain[fw] Problem
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}icon:caret-right[fw] Scalability testing
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}icon:caret-right[fw] Workload testing
+icon:sun[fw] Solution
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}icon:caret-right[fw] Overview
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}icon:caret-right[fw] Compare
+icon:rocket[fw] Deploy
+icon:flask[fw] Test
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}icon:caret-right[fw] Measurements
+{nbsp}{nbsp}{nbsp}{nbsp}{nbsp}icon:caret-right[fw] Compare of results
+icon:graduation-cap[fw] Experience
+.^|
+image:agenda.png[float=right]
+|===
+
+<<<

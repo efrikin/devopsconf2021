@@ -1,0 +1,78 @@
+== !
+{empty} +
+[.halign-center]
+[.big]
+[orange]#**Deploy of large cluster**#
+
+image::big_scale.png[width=35%]
+
+== icon:weight[fw] Deploy of large cluster
+
+{empty} +
+{empty} +
+
+[.small]
+.Resources for large cluster
+[cols="^,^,^,^,^"]
+|===
+.^| Role 
+.^| CPU 
+.^| RAM 
+.^| Disk 
+.^| Number of nodes
+ 
+.^| Master .^| 36 .^| 96GB .^| 30GB .^| 3
+.^| Monitoring .^| 12 .^| 80GB .^| 40GB .^| 1
+.^| W-Nodes .^| 8 .^| 4GB .^| 15GB .^| [red]#**200**#
+.^| H-Nodes .^| 40m .^| 20MB .^| - .^| [red]#**5000**#
+|===
+
+== icon:weight[fw] Results of clusterloader2 work
+
+[vega,diagrams/5000-cl2-real-compare,svg]
+....
+include::diagrams/5000-nodes-cl2-test-compare.json[]
+....
+
+== icon:weight[fw] Results of measurements for etcd
+
+{empty} +
+
+[cols="^,^,^,^,^,^,^,^,^"]
+|===
+.2+.^| **Stage**
+.2+.^| **Nodes**
+.2+.^| **RPC rate (req/s)**
+.2+.^| **Memory      (MB)**
+2+.^| **Client Traffic (kB/s)**
+2+.^| **Disk duration (ms)**
+.2+.^| **Number of resources**
+.^| **in** .^| **out**
+.^| **DB fsync** .^| **WAL fsync**
+
+.^| [purple]#**Idle**# .^| 204 .^| 60 ^| 80 .^| 40 .^| 300 .^| 60 .^| 30 .^| -
+.^| [purple]#**Idle hollow**# .^| 5204 .^| [red]#**600**# .^| 9000 .^| 185 .^| 2500 .^| 63 .^| 30 .^| +5000
+.^| [purple]#**Test**# .^| 5000 .^| [red]#**3800**# .^| 9000 .^| 240 .^| 4000 .^| [red]#**100**# .^| 40 .^| +30000
+|===
+
+== icon:weight[fw] Results of measurements for API server
+
+{empty} +
+{empty} +
+
+[cols="^,^,^,^,^,^,^"]
+|===
+.2+.^| **Stage**
+.2+.^| **Nodes**
+.2+.^| **CPU**
+.2+.^| **Memory (MB)**
+2+.^| **SLI (req/s)**
+.2+.^| **Number of resources**
+.^| **READ** .^| **WRITE**
+
+.^| [purple]#**Idle**# .^| 204 .^| 1.2 .^| 1500 .^| 30 .^| 43 .^| -
+.^| [purple]#**Idle hollow**# .^| 5204 .^| 3 .^| 40000 .^| 520 .^| 560 .^| +5000
+.^| [purple]#**Test**# .^| 5000 .^| [red]#**8**# .^| [red]#**40000**# .^| [red]#**3500**# .^| [red]#**590**# .^| +30000
+|===
+
+<<<

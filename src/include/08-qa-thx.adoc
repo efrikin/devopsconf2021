@@ -1,0 +1,19 @@
+== !
+
+[.halign-center]
+[orange]#**ANY QUESTIONS?**#
+
+image::qa.png[width=50%]
+[.halign-center]
+[orange]#**FEEL FREE TO ASK ME**#
+
+<<<
+
+== !
+
+image::thx.png[]
+[.halign-center]
+[.big]
+[big]#icon:github[fw]# **[orange]#{social_network}.github.io/devopsconf2021#**
+
+<<<

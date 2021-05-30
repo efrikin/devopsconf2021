@@ -1,0 +1,223 @@
+== !
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+[.halign-center]
+[.big]
+[orange]#**General problems**#
+
+image::problems.png[width=37%]
+
+== icon:cloud-rain[fw] General problems
+
+[frame=none, grid=none, cols="100a"]
+|===
+.^|
+* Extensibility testing
+|===
+
+image::extensibility.png[float=center]
+
+== icon:cloud-rain[fw] General problems
+
+[frame=none, grid=none, cols="100a"]
+|===
+.^|
+* Extensibility testing
+[%step]
+* Small memory leaks
+
+|===
+
+image::problems_component.png[float=center]
+
+== icon:cloud-rain[fw] General problems
+
+[frame=none, grid=none, cols="100a"]
+|===
+.^|
+* Extensibility testing
+* Small memory leaks
+[%step]
+* Scalability and performance testing
+|===
+
+image::performance.png[float=center]
+
+== icon:cloud-rain[fw] General problems
+
+[frame=none, grid=none, cols="100a"]
+|===
+.^|
+* Extensibility testing
+* Small memory leaks
+* Scalability and performance testing
+[%step]
+* Problems with the master components
+|===
+
+image::expose_k8s_master.png[float=center]
+
+== !
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+[.halign-center]
+[.big]
+[orange]#**Scalability testing problems**#
+
+image::problems.png[width=37%]
+
+== icon:cloud-rain[fw] Scalability testing problems
+
+[frame=none, grid=none, cols="100a"]
+|===
+.^|
+**Spawning large-clusters is expensive and time-consuming**
+
+** With [orange]#**kubespray**# application it takes from 20-30min to icon:infinity[fw]
+** Requires costly hardware resources
+|===
+
+{empty} +
+{empty} +
+{empty} +
+
+image::problem_scalability_1.png[float=right, width=97%]
+
+== icon:cloud-rain[fw] Scalability testing problems
+[frame=none, grid=none, cols="100a"]
+|===
+.^|
+**Need to do once for each release Kubernetes or it components**
+
+** collect real-world performance and scalability data
+** compare performance data between releases
+|===
+
+{empty} +
+{empty} +
+{empty} +
+
+image::problem_scalability_2.png[float=right, width=97%]
+
+== icon:cloud-rain[fw] Scalability testing problems
+
+[frame=none, grid=none, cols="100a"]
+|===
+.^|
+**Need a light-weight mechanism for fast deploy k8s cluster**
+
+** quickly evaluate new ideas
+** implement and check different performance improvements
+|===
+
+{empty} +
+{empty} +
+{empty} +
+
+image::problem_scalability_3.png[float=right, width=97%]
+
+== !
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+[.halign-center]
+[.big]
+[orange]#**Workload testing problems**#
+
+image::problems_workload.png[width=37%]
+
+== icon:cloud-rain[fw] Workload testing problems
+
+[frame=none, grid=none, cols="100a"]
+|===
+.^|
+**Unfriendly for users**
+
+** All e2e tests are written in Go
+** Complicated process of running and debugging tests
+*** Understanding how tests really work
+*** Testing new features requires code changes
+
+|===
+
+image::problem_test_1.png[float=right, width=95%]
+
+== icon:cloud-rain[fw] Workload testing problems
+
+[frame=none, grid=none, cols="100a"]
+|===
+.^|
+**Most components that are developed outside of Kubernetes**
+
+** CRI (containerd, CRI-O, Docker, etc)
+** CNI (Calico, Cilium, Flannel, etc)
+** CSI (Ceph, LINSTOR, AWS, etc)
+** **...**
+|===
+
+image::problem_test_2.png[float=right, width=95%]
+
+== icon:cloud-rain[fw] Workload testing problems
+
+[frame=none, grid=none, cols="70a, 70a"]
+|===
+.^|
+.Golang test definition example 
+[.small]
+```go
+...
+testsuites.DriverInfo{
+    Name:        "csi-nfsplugin",
+    MaxFileSize: testpatterns.FileSizeLarge,
+    SupportedFsType: sets.NewString(
+        "",
+    ),
+    Capabilities: map[testsuites.Capability]bool{
+        testsuites.CapPersistence: true,
+        testsuites.CapExec:        true,
+    },
+}
+...
+```
+.^|
+[.fragment]
+.YAML test definition example
+```yaml
+StorageClass:
+  FromName: true
+SnapshotClass:
+  FromName: true
+DriverInfo:
+  Name: hostpath.csi.k8s.io
+  Capabilities:
+    block: true
+    controllerExpansion: true
+    exec: true
+    multipods: true
+    persistence: true
+    pvcDataSource: true
+InlineVolumes:
+- Attributes: {}
+```
+|===
+[.small]
+[.fragment]
+.Test startup example
+```bash
+ginkgo -p -focus='External.Storage.*csi-hostpath' -skip='\[Feature:\|\[Disruptive\]' \
+       e2e.test -- -storage.testdriver=/tmp/hostpath-testdriver.yaml
+```
+
+== !
+
+image::very_hard.jpg[width=90%]
+
+<<<

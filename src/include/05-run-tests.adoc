@@ -1,0 +1,221 @@
+
+== !
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+[.halign-center]
+[.big]
+[orange]#**clusterloader2 run**#
+
+image::run_test.png[]
+
+== icon:flask[fw] clusterloader2 run
+[.small]
+.config.yaml
+```yaml
+{{$POD_COUNT := DefaultParam .POD_COUNT 100}} // <1>
+{{$POD_THROUGHPUT := DefaultParam .POD_THROUGHPUT 5}}
+{{$CONTAINER_IMAGE := DefaultParam .CONTAINER_IMAGE "k8s.gcr.io/pause:3.1"}}
+{{$POD_STARTUP_LATENCY_THRESHOLD := DefaultParam .POD_STARTUP_LATENCY_THRESHOLD "5s"}}
+{{$OPERATION_TIMEOUT := DefaultParam .OPERATION_TIMEOUT "15m"}}
+name: node-throughput // <2>
+...
+steps:
+- measurements: // <3>
+  - Identifier: APIResponsivenessPrometheusSimple
+    Method: APIResponsivenessPrometheus
+...
+- phases:
+  - namespaceRange:
+      min: 1
+      max: {{$POD_COUNT}}
+    replicasPerNamespace: 1
+    objectBundle:
+    - basename: latency-pod-rc
+      objectTemplatePath: rc.yaml // <4>
+...
+```
+
+[.small]
+.Constants for node-throughout test
+[cols="^,^,^,^,^"]
+|===
+.^| **POD COUNT** .^| **THROUGHPUT** .^| **IMAGE** .^| **LATENCY** .^| **OPS TIMEOUT**
+.^| 1000          .^| 300            .^| pause:3.3 .^| 10s         .^| 15m
+|===
+
+
+== icon:flask[fw] clusterloader2 run
+
+[.small]
+.rc.yaml
+```yaml
+apiVersion: v1
+kind: ReplicationController
+spec:
+  replicas: {{.Replicas}}
+  selector:
+    name: {{.Name}}
+  template:
+    metadata:
+      labels:
+        name: {{.Name}}
+        group: {{.Group}}
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - image: {{.Image}}
+        imagePullPolicy: IfNotPresent
+        name: {{.Name}}
+...
+```
+[frame=none, grid=none,cols="50a,110a"]
+|===
+.^|
+[.fragment]
+[.small]
+.clusterloader2 run
+```sh
+docker run --rm --network host \
+    -v ${HOME}/.kube/:${HOME}/.kube:ro \
+    -v $(pwd)/testing:${HOME}/testing:ro \
+    -ti clusterloader2 \
+    --kubeconfig=${HOME}/.kube/config \ <1>
+    --testconfig=${HOME}/testing/config.yaml \ // <2>
+    --provider=kubemark <3>
+```
+.^|
+[.small]
+[.fragment]
+[.halign-right]
+<1> [red]#kubeconfig# is a config file
+<2> [red]#testconfig# is a definition of tests
+<3> [red]#Provider# type
+|===
+
+== !
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+[.halign-center]
+[.big]
+[orange]#**Results of clusterloader2 work**#
+
+image::countdown.png[]
+
+== !
+
+{empty} +
+
+[vega,diagrams/cl2-creation-cleanup,svg]
+....
+include::diagrams/1000-pods-real-vs-hollow-time-test.json[]
+....
+
+== !
+
+{empty} +
+
+[vega,diagrams/cl2-real-hollow-cluster,svg]
+....
+include::diagrams/1000-pods-real-vs-hollow.json[]
+....
+
+== !
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+[.halign-center]
+[.big]
+[orange]#**Results of measurements for etcd**#
+
+image::measurements.jpeg[]
+
+== !
+
+{empty} +
+
+[vega,diagrams/etcd-1000-pods-fsync,svg]
+....
+include::diagrams/etcd_db_fsync.json[]
+....
+
+== !
+
+{empty} +
+
+[vega,diagrams/etcd-1000-pods-rpcrate,svg]
+....
+include::diagrams/etcd_rpc_rate.json[]
+....
+
+== !
+
+{empty} +
+
+[vega,diagrams/etcd-1000-pods-memory,svg]
+....
+include::diagrams/etcd_memory.json[]
+....
+
+== !
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+[.halign-center]
+[.big]
+[orange]#**Results of measurements for API-server**#
+
+image::measurements.jpeg[]
+
+== !
+
+{empty} +
+
+[vega,diagrams/api-1000-pods-sli-read,svg]
+....
+include::diagrams/api_sli_read.json[]
+....
+
+== !
+
+{empty} +
+
+[vega,diagrams/api-1000-pods-sli-write,svg]
+....
+include::diagrams/api_sli_write.json[]
+....
+
+== !
+
+{empty} +
+
+[vega,diagrams/api-1000-pods-memory,svg]
+....
+include::diagrams/api_memory.json[]
+....
+
+== !
+
+{empty} +
+
+[vega,diagrams/api-1000-pods-cpu,svg]
+....
+include::diagrams/api_cpu.json[]
+....
+
+<<<

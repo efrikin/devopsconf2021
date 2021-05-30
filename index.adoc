@@ -1,0 +1,31 @@
+include::src/defaults/doc-general-attributes.adoc[]
+
+= Kubernetes clusterpass:q[<br>]Testing Performance and Scalability
+
+:firstname: Evgenii
+:lastname: Frikin
+:organization_unit: Huawei
+:revnumber: 0.0.0
+:revdate: {docdate}
+:social_network: username
+
+{empty} +
+icon:user[fw] [white]#{firstname} {lastname}#
+[%hardbreaks]
+icon:hashtag[fw] [white]#{organization_unit}# image:huawei-title.png[width=4%]
+[%hardbreaks]
+icon:code-fork[fw] [white]#{revnumber}#
+[%hardbreaks]
+icon:calendar-o[fw] [white]#{revdate}#
+
+include::src/include/00-agenda.adoc[]
+include::src/include/01-into.adoc[]
+include::src/include/02-problems.adoc[]
+include::src/include/03-solution.adoc[]
+include::src/include/04-deploy.adoc[]
+include::src/include/05-run-tests.adoc[]
+include::src/include/06-large-scale.adoc[]
+include::src/include/07-our-exp.adoc[]
+include::src/include/08-qa-thx.adoc[]
+
+<<<
